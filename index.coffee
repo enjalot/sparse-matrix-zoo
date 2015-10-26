@@ -23,7 +23,8 @@ process = (filename) ->
       console.log "first line", line
       meta = { rows: parts[0], cols: parts[1], value: parts[1], rowIndex: "source", colIndex: "target"}
     else
-      data.push { source: +parts[0]-1, target: +parts[1]-1, value: +parts[1]}
+      if +parts[0] && +parts[1]
+        data.push { source: +parts[0]-1, target: +parts[1]-1, value: +parts[1]}
 
   return {
     info: info
