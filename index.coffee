@@ -34,12 +34,15 @@ process = (filename) ->
 
 mtxdir = __dirname + "/mtx"
 jsondir = __dirname + "/json"
+list = []
 files = fs.readdirSync mtxdir
 files.forEach (file) ->
   ext = path.extname file
   base = path.basename file, ext
   if ext == ".mtx"
+    list.push { name: base, url: "http://enjalot.github.io/sparse-matrix-zoo/json/" + base + ".json"}
     result = process path.join(mtxdir, file)
     fs.writeFileSync path.join(jsondir, base + ".json"), JSON.stringify(result)
 
+fs.writeFileSync jsondir + "/list.json", JSON.stringify(list)
   
